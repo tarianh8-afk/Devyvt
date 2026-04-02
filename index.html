@@ -98,7 +98,20 @@ footer{border-top:1px solid rgba(255,255,255,.07);padding:20px clamp(16px,5vw,52
 .f-logo{font-family:‘Syne’,sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;background:linear-gradient(135deg,#f1ecff,#9b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .f-copy{font-size:.72rem;color:#4e4870}
 
-/* MOBILE */
+/* OFFLINE OVERLAY */
+#offline{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px;background:rgba(4,2,13,0.97);backdrop-filter:blur(14px)}
+.og{font-size:4.5rem;animation:spin 3s linear infinite;margin-bottom:24px;filter:drop-shadow(0 0 18px rgba(240,62,122,0.5))}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.ot{font-family:‘Syne’,sans-serif;font-weight:800;font-size:clamp(1.8rem,6vw,2.8rem);letter-spacing:.08em;text-transform:uppercase;background:linear-gradient(135deg,#fff 0%,#f03e7a 60%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.os{display:flex;align-items:center;justify-content:center;gap:8px;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#f03e7a;margin-bottom:28px}
+.osd{width:8px;height:8px;border-radius:50%;background:#f03e7a;animation:op 1.5s ease infinite}
+@keyframes op{0%{box-shadow:0 0 0 0 rgba(240,62,122,.7)}70%{box-shadow:0 0 0 10px rgba(240,62,122,0)}100%{box-shadow:0 0 0 0 rgba(240,62,122,0)}}
+.oc{background:rgba(240,62,122,.07);border:1px solid rgba(240,62,122,.22);border-radius:14px;padding:24px 32px;margin-bottom:24px;max-width:340px;width:100%}
+.ocl{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#f03e7a;margin-bottom:6px}
+.ocv{font-family:‘Syne’,sans-serif;font-weight:600;font-size:1rem;color:#f1ecff;margin-bottom:16px}
+.od{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#9e93c0;padding:11px 24px;border:1px solid rgba(255,255,255,.1);border-radius:999px;background:rgba(255,255,255,.03);text-decoration:none;transition:all .22s}
+.od:hover{border-color:rgba(240,62,122,.4);color:#f1ecff;background:rgba(240,62,122,.07)}
+
 @media(max-width:560px){
 header{padding:0 16px}
 nav button{padding:5px 10px;font-size:.7rem}
@@ -111,8 +124,21 @@ footer{flex-direction:column;text-align:center}
 </head>
 <body>
 <canvas id="bg"></canvas>
-<div id="app">
 
+<div id="offline">
+  <div class="og">⚙️</div>
+  <div class="ot">Dev YVT</div>
+  <div class="os"><span class="osd"></span> Website Is Offline</div>
+  <div class="oc">
+    <div class="ocl">Reason</div>
+    <div class="ocv">Under Maintenance</div>
+    <div class="ocl">Until</div>
+    <div class="ocv" style="margin-bottom:0">Back Soon</div>
+  </div>
+  <a class="od" href="https://discord.gg/thu8aFPcgq" target="_blank" rel="noopener">💬 Join Our Discord</a>
+</div>
+
+<div id="app">
   <header>
     <div class="logo">Dev YVT</div>
     <nav>
