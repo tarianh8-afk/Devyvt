@@ -4,227 +4,113 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YVT — Dev</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<title>Dev YVT</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --pink:        #f03e7a;
-  --purple:      #7c3aed;
-  --purple-mid:  #9b5cf6;
-  --bg:          #04020d;
-  --bg-card:     rgba(255,255,255,0.028);
-  --bg-card-hov: rgba(255,255,255,0.052);
-  --border:      rgba(255,255,255,0.07);
-  --border-hov:  rgba(240,62,122,0.4);
-  --text:        #f1ecff;
-  --text-2:      #9e93c0;
-  --text-3:      #4e4870;
-  --radius:      12px;
-  --radius-sm:   8px;
-}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;min-height:100vh;overflow-x:hidden}
+html{-webkit-font-smoothing:antialiased}
+body{background:#04020d;color:#f1ecff;font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
 
-#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
 
 #app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
 
-/* ── HEADER ── */
-header{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 clamp(20px,5vw,56px);height:64px;background:rgba(4,2,13,0.82);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border-bottom:1px solid var(–border)}
-.logo{font-family:‘Syne’,sans-serif;font-weight:800;font-size:0.85rem;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(135deg,#ffffff 0%,#c084fc 50%,#7c3aed 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;flex-shrink:0;filter:drop-shadow(0 0 12px rgba(124,58,237,0.5))}
-nav{display:flex;align-items:center;gap:2px}
-nav button{font-family:‘DM Sans’,sans-serif;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(–text-2);background:none;border:none;padding:6px 16px;border-radius:6px;cursor:pointer;transition:color .2s,background .2s;white-space:nowrap}
-nav button:hover{color:var(–text);background:rgba(255,255,255,0.05)}
-nav button.active{color:var(–text);background:rgba(240,62,122,0.12);box-shadow:inset 0 0 0 1px rgba(240,62,122,0.3)}
+/* NAV */
+header{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,5vw,52px);height:62px;background:rgba(4,2,13,0.88);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,0.07)}
+.logo{font-family:‘Syne’,sans-serif;font-weight:800;font-size:.88rem;letter-spacing:.12em;text-transform:uppercase;background:linear-gradient(135deg,#fff 0%,#c084fc 55%,#7c3aed 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;flex-shrink:0}
+nav{display:flex;gap:2px}
+nav button{font-family:‘DM Sans’,sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:#9e93c0;background:none;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;transition:all .2s;white-space:nowrap}
+nav button:hover{color:#f1ecff;background:rgba(255,255,255,.05)}
+nav button.active{color:#f1ecff;background:rgba(240,62,122,.13);box-shadow:inset 0 0 0 1px rgba(240,62,122,.35)}
 
-/* ── MAIN ── */
-main{flex:1;width:100%;max-width:1100px;margin:0 auto;padding:clamp(48px,8vw,80px) clamp(20px,5vw,56px)}
+/* MAIN */
+main{flex:1;width:100%;max-width:1100px;margin:0 auto;padding:clamp(40px,8vw,72px) clamp(16px,5vw,52px)}
 .tab-panel{display:none}
-.tab-panel.active{display:block;animation:reveal .35s ease both}
-@keyframes reveal{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.tab-panel.active{display:block;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── SECTION ── */
-.page-label{font-size:.7rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(–pink);margin-bottom:12px;display:flex;align-items:center;gap:10px}
-.page-label::before{content:’’;width:24px;height:1px;background:var(–pink);opacity:.7}
-.page-title{font-family:‘Syne’,sans-serif;font-weight:700;font-size:clamp(1.9rem,4vw,2.6rem);line-height:1.15;color:var(–text);margin-bottom:8px;letter-spacing:-.01em}
-.page-sub{font-size:.92rem;color:var(–text-2);font-weight:300;margin-bottom:48px;max-width:480px}
+/* SECTION HEADER */
+.pg-label{font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#f03e7a;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.pg-label::before{content:’’;width:20px;height:1px;background:#f03e7a}
+.pg-title{font-family:‘Syne’,sans-serif;font-weight:700;font-size:clamp(1.8rem,4vw,2.5rem);color:#f1ecff;margin-bottom:8px}
+.pg-sub{font-size:.9rem;color:#9e93c0;font-weight:300;margin-bottom:44px}
 
-/* ── HOME ── */
-.home-wrap{display:flex;flex-direction:column;align-items:center;text-align:center;min-height:calc(100vh - 64px - clamp(48px,8vw,80px)*2);justify-content:center}
+/* HOME */
+.home-wrap{display:flex;flex-direction:column;align-items:center;text-align:center;justify-content:center;min-height:calc(100vh - 62px - clamp(40px,8vw,72px)*2)}
 
-.home-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#ff4d9e;padding:7px 20px;border:1px solid rgba(255,60,140,0.5);border-radius:999px;background:rgba(255,30,100,0.07);margin-bottom:36px;box-shadow:0 0 14px rgba(255,30,100,0.15)}
-.live-dot{width:6px;height:6px;border-radius:50%;background:#ff4d9e;flex-shrink:0;display:inline-block;animation:livePulse 2s ease infinite;box-shadow:0 0 6px rgba(255,77,158,.9)}
-@keyframes livePulse{0%,100%{box-shadow:0 0 0 0 rgba(255,77,158,.8),0 0 6px rgba(255,77,158,.7)}60%{box-shadow:0 0 0 7px rgba(255,77,158,0),0 0 3px rgba(255,77,158,.2)}}
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#ff4d9e;padding:7px 20px;border:1px solid rgba(255,60,140,.5);border-radius:999px;background:rgba(255,30,100,.07);margin-bottom:32px;box-shadow:0 0 14px rgba(255,30,100,.15)}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:#ff4d9e;display:inline-block;animation:dp 2s ease infinite;box-shadow:0 0 6px #ff4d9e}
+@keyframes dp{0%,100%{box-shadow:0 0 0 0 rgba(255,77,158,.8)}60%{box-shadow:0 0 0 7px rgba(255,77,158,0)}}
 
-.home-h1{font-family:‘Syne’,sans-serif;font-weight:800;font-size:clamp(3rem,9vw,6.5rem);line-height:1.02;letter-spacing:-.02em;margin-bottom:24px}
-.home-h1 .w1{display:block;color:var(–text)}
-.home-h1 .w2{display:block;background:linear-gradient(135deg,#ffffff 0%,#c084fc 50%,#7c3aed 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 24px rgba(124,58,237,0.5))}
+.h1{font-family:‘Syne’,sans-serif;font-weight:800;font-size:clamp(2.8rem,9vw,6rem);line-height:1.03;letter-spacing:-.02em;margin-bottom:20px}
+.h1 .l1{display:block;color:#f1ecff}
+.h1 .l2{display:block;background:linear-gradient(135deg,#fff 0%,#c084fc 50%,#7c3aed 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-.home-body{font-size:clamp(.95rem,2vw,1.05rem);color:var(–text-2);max-width:480px;line-height:1.75;margin-bottom:40px;font-weight:300;text-align:center}
+.h-desc{font-size:clamp(.95rem,2vw,1.05rem);color:#9e93c0;max-width:460px;line-height:1.75;margin-bottom:36px;font-weight:300}
 
-.cta-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-.btn{font-family:‘DM Sans’,sans-serif;font-weight:500;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;border-radius:var(–radius-sm);padding:12px 28px;cursor:pointer;transition:all .22s ease;border:none}
-.btn-fill{background:linear-gradient(135deg,var(–pink) 0%,var(–purple) 100%);color:#fff;box-shadow:0 4px 24px rgba(240,62,122,.28)}
-.btn-fill:hover{transform:translateY(-1px);box-shadow:0 8px 32px rgba(240,62,122,.42)}
-.btn-line{background:transparent;color:var(–text-2);box-shadow:inset 0 0 0 1px var(–border)}
-.btn-line:hover{color:var(–text);box-shadow:inset 0 0 0 1px rgba(240,62,122,.4);background:rgba(240,62,122,.06)}
+.btns{display:flex;flex-direction:column;align-items:center;gap:12px}
+.btn{font-family:‘DM Sans’,sans-serif;font-weight:500;font-size:.8rem;letter-spacing:.09em;text-transform:uppercase;border:none;border-radius:8px;padding:13px 0;width:240px;cursor:pointer;transition:all .22s;text-decoration:none;display:flex;align-items:center;justify-content:center}
+.btn-main{background:linear-gradient(135deg,#f03e7a,#7c3aed);color:#fff;box-shadow:0 4px 22px rgba(240,62,122,.3)}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(240,62,122,.45)}
 
-/* ── CARDS ── */
-.card{background:var(–bg-card);border:1px solid var(–border);border-radius:var(–radius);padding:28px;transition:background .22s,border-color .22s,transform .22s,box-shadow .22s;position:relative;overflow:hidden}
-.card::after{content:’’;position:absolute;inset:0;border-radius:var(–radius);background:linear-gradient(135deg,rgba(240,62,122,.04),rgba(124,58,237,.04));opacity:0;transition:opacity .22s;pointer-events:none}
-.card:hover{background:var(–bg-card-hov);border-color:var(–border-hov);transform:translateY(-3px);box-shadow:0 12px 40px rgba(240,62,122,.1),0 0 0 1px rgba(240,62,122,.08)}
-.card:hover::after{opacity:1}
+/* CARDS */
+.card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:26px;transition:all .22s;position:relative;overflow:hidden}
+.card:hover{background:rgba(255,255,255,.05);border-color:rgba(240,62,122,.38);transform:translateY(-3px);box-shadow:0 12px 36px rgba(240,62,122,.1)}
 
-/* ── PRODUCTS ── */
-.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px}
-.product-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;gap:12px}
-.product-icon-wrap{width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid var(–border);display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0}
-.tag{font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:3px 9px;border-radius:20px;flex-shrink:0}
-.tag-free{background:rgba(240,62,122,.12);color:#f472a8;border:1px solid rgba(240,62,122,.22)}
-.tag-paid{background:rgba(124,58,237,.12);color:#a78bfa;border:1px solid rgba(124,58,237,.22)}
-.tag-soon{background:rgba(255,255,255,.05);color:var(–text-3);border:1px solid var(–border)}
-.product-name{font-family:‘Syne’,sans-serif;font-weight:600;font-size:1rem;margin-bottom:8px;letter-spacing:-.005em}
-.product-desc{font-size:.87rem;color:var(–text-2);line-height:1.65;margin-bottom:20px;font-weight:300}
-.product-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(–border);padding-top:16px;margin-top:auto}
-.product-price{font-family:‘Syne’,sans-serif;font-size:1.1rem;font-weight:700;color:var(–text)}
-.product-cta{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(–pink);cursor:pointer;background:none;border:none;transition:opacity .18s;font-family:‘DM Sans’,sans-serif}
-.product-cta:hover{opacity:.7}
+/* PRODUCTS */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:16px}
+.prod-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:12px}
+.prod-icon{width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.tag{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:3px 9px;border-radius:20px}
+.tag-v3{background:rgba(124,58,237,.18);color:#a78bfa;border:1px solid rgba(124,58,237,.3)}
+.prod-name{font-family:‘Syne’,sans-serif;font-weight:600;font-size:.98rem;margin-bottom:8px}
+.prod-desc{font-size:.86rem;color:#9e93c0;line-height:1.6;margin-bottom:18px;font-weight:300}
+.prod-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.07);padding-top:14px}
+.prod-price{font-family:‘Syne’,sans-serif;font-size:1rem;font-weight:700;color:#f1ecff}
+.prod-cta{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#f03e7a;background:none;border:none;cursor:pointer;font-family:‘DM Sans’,sans-serif;transition:opacity .18s}
+.prod-cta:hover{opacity:.7}
 
-/* ── SOCIALS ── */
-.socials-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:12px}
-.social-card{display:flex;align-items:center;gap:16px;background:var(–bg-card);border:1px solid var(–border);border-radius:var(–radius);padding:18px 20px;text-decoration:none;color:inherit;transition:background .22s,border-color .22s,transform .22s;cursor:pointer}
-.social-card:hover{background:var(–bg-card-hov);border-color:var(–border-hov);transform:translateY(-2px)}
-.s-icon{width:42px;height:42px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid var(–border)}
-.s-name{font-family:‘Syne’,sans-serif;font-weight:600;font-size:.9rem;margin-bottom:2px}
-.s-handle{font-size:.78rem;color:var(–text-3)}
-.s-arrow{margin-left:auto;color:var(–text-3);font-size:.9rem;transition:color .18s,transform .18s;flex-shrink:0}
-.social-card:hover .s-arrow{color:var(–pink);transform:translateX(3px)}
+/* SOCIALS */
+.soc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:12px}
+.soc-card{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px;text-decoration:none;color:#f1ecff;transition:all .22s}
+.soc-card:hover{background:rgba(255,255,255,.05);border-color:rgba(240,62,122,.38);transform:translateY(-2px)}
+.soc-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07)}
+.soc-name{font-family:‘Syne’,sans-serif;font-weight:600;font-size:.88rem;margin-bottom:2px}
+.soc-handle{font-size:.75rem;color:#4e4870}
+.soc-arrow{margin-left:auto;color:#4e4870;transition:all .18s}
+.soc-card:hover .soc-arrow{color:#f03e7a;transform:translateX(3px)}
 
-/* ── STAFF ── */
-.staff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:16px}
-.staff-card{background:var(–bg-card);border:1px solid var(–border);border-radius:var(–radius);padding:32px 24px 28px;text-align:center;transition:background .22s,border-color .22s,transform .22s}
-.staff-card:hover{background:var(–bg-card-hov);border-color:rgba(124,58,237,.3);transform:translateY(-3px)}
-.av-wrap{width:68px;height:68px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;border:1px solid var(–border);background:rgba(255,255,255,.04)}
-.staff-name{font-family:‘Syne’,sans-serif;font-weight:700;font-size:.95rem;margin-bottom:8px;letter-spacing:-.005em}
-.role-badge{display:inline-block;font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:14px}
-.rb-owner{background:rgba(240,62,122,.12);color:#f472a8;border:1px solid rgba(240,62,122,.22)}
-.rb-dev{background:rgba(124,58,237,.12);color:#a78bfa;border:1px solid rgba(124,58,237,.22)}
-.rb-admin{background:rgba(251,191,36,.1);color:#fcd34d;border:1px solid rgba(251,191,36,.2)}
-.rb-mod{background:rgba(34,197,94,.1);color:#86efac;border:1px solid rgba(34,197,94,.2)}
-.rb-coowner{background:rgba(251,191,36,.12);color:#fcd34d;border:1px solid rgba(251,191,36,.25)}
-.rb-trialmod{background:rgba(34,197,94,.08);color:#6ee7b7;border:1px solid rgba(34,197,94,.18)}
-.staff-bio{font-size:.83rem;color:var(–text-2);line-height:1.65;font-weight:300}
+/* STAFF */
+.staff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:16px}
+.staff-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:28px 20px;text-align:center;transition:all .22s}
+.staff-card:hover{background:rgba(255,255,255,.05);border-color:rgba(124,58,237,.3);transform:translateY(-3px)}
+.av{width:66px;height:66px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.04)}
+.sname{font-family:‘Syne’,sans-serif;font-weight:700;font-size:.92rem;margin-bottom:8px}
+.role{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:12px}
+.r-owner{background:rgba(240,62,122,.13);color:#f472a8;border:1px solid rgba(240,62,122,.25)}
+.r-coowner{background:rgba(251,191,36,.1);color:#fcd34d;border:1px solid rgba(251,191,36,.22)}
+.r-trialmod{background:rgba(34,197,94,.09);color:#86efac;border:1px solid rgba(34,197,94,.2)}
+.r-dev{background:rgba(124,58,237,.13);color:#a78bfa;border:1px solid rgba(124,58,237,.25)}
+.sbio{font-size:.82rem;color:#9e93c0;line-height:1.6;font-weight:300}
 
-/* ── FOOTER ── */
-footer{border-top:1px solid var(–border);padding:24px clamp(20px,5vw,56px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.footer-logo{font-family:‘Syne’,sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;background:linear-gradient(130deg,var(–text),var(–purple-mid));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.footer-copy{font-size:.75rem;color:var(–text-3);letter-spacing:.05em}
+/* FOOTER */
+footer{border-top:1px solid rgba(255,255,255,.07);padding:20px clamp(16px,5vw,52px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.f-logo{font-family:‘Syne’,sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;background:linear-gradient(135deg,#f1ecff,#9b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.f-copy{font-size:.72rem;color:#4e4870}
 
-nav button.nav-locked{color:var(–text-3);cursor:pointer;opacity:0.55}
-nav button.nav-locked:hover{color:var(–text-2);background:rgba(255,255,255,0.03);opacity:0.7}
-
-/* ── CLOSED PAGE ── */
-.closed-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:50vh;gap:16px}
-.closed-icon{font-size:3rem;margin-bottom:8px;filter:grayscale(0.3)}
-.closed-title{font-family:‘Syne’,sans-serif;font-weight:700;font-size:1.6rem;color:var(–text);letter-spacing:-.01em}
-.closed-sub{font-size:.92rem;color:var(–text-3);font-weight:300;max-width:340px;line-height:1.7}
-.closed-badge{display:inline-flex;align-items:center;gap:8px;font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(–text-3);padding:7px 16px;border:1px solid rgba(255,255,255,0.08);border-radius:20px;background:rgba(255,255,255,0.03)}
-
-/* ── OFFLINE OVERLAY ── */
-#offline-overlay{
-position:fixed;inset:0;z-index:9999;
-display:flex;flex-direction:column;align-items:center;justify-content:center;
-background:rgba(4,2,13,0.97);
-backdrop-filter:blur(12px);
--webkit-backdrop-filter:blur(12px);
-text-align:center;
-padding:32px;
-}
-.offline-gear{
-font-size:5rem;
-animation:spinGear 3s linear infinite;
-margin-bottom:28px;
-filter:drop-shadow(0 0 20px rgba(240,62,122,0.5));
-}
-@keyframes spinGear{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-.offline-title{
-font-family:‘Syne’,sans-serif;font-weight:800;
-font-size:clamp(1.8rem,6vw,3rem);
-letter-spacing:.08em;text-transform:uppercase;
-background:linear-gradient(135deg,#fff 0%,#f03e7a 60%);
--webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-margin-bottom:8px;
-}
-.offline-status{
-display:flex;align-items:center;justify-content:center;gap:8px;
-font-size:.75rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
-color:#f03e7a;margin-bottom:32px;
-}
-.offline-status-dot{
-width:8px;height:8px;border-radius:50%;background:#f03e7a;
-box-shadow:0 0 0 0 rgba(240,62,122,0.7);
-animation:offlinePulse 1.5s ease infinite;
-}
-@keyframes offlinePulse{
-0%{box-shadow:0 0 0 0 rgba(240,62,122,0.7)}
-70%{box-shadow:0 0 0 10px rgba(240,62,122,0)}
-100%{box-shadow:0 0 0 0 rgba(240,62,122,0)}
-}
-.offline-card{
-background:rgba(240,62,122,0.06);
-border:1px solid rgba(240,62,122,0.2);
-border-radius:14px;
-padding:28px 36px;
-margin-bottom:28px;
-max-width:360px;
-width:100%;
-}
-.offline-reason-label{
-font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
-color:#f03e7a;margin-bottom:8px;
-}
-.offline-reason-text{
-font-family:‘Syne’,sans-serif;font-weight:600;font-size:1.1rem;
-color:var(–text);margin-bottom:20px;
-}
-.offline-until-label{
-font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
-color:#f03e7a;margin-bottom:6px;
-}
-.offline-until-text{
-font-family:‘Syne’,sans-serif;font-weight:600;font-size:1rem;
-color:var(–text-2);
-}
-.offline-discord{
-display:inline-flex;align-items:center;gap:10px;
-font-size:.75rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-color:var(–text-2);
-padding:12px 28px;
-border:1px solid rgba(255,255,255,0.12);
-border-radius:999px;
-background:rgba(255,255,255,0.03);
-text-decoration:none;
-transition:all .22s;
-}
-.offline-discord:hover{border-color:rgba(240,62,122,0.4);color:var(–text);background:rgba(240,62,122,0.07);}
-
-@media(max-width:580px){
+/* MOBILE */
+@media(max-width:560px){
 header{padding:0 16px}
-nav button{padding:6px 10px;font-size:.72rem}
-main{padding:36px 16px}
-.home-wrap{min-height:auto;padding:40px 0}
-.cta-row{flex-direction:column;align-items:center}
-.btn{width:100%;text-align:center;max-width:260px}
+nav button{padding:5px 10px;font-size:.7rem}
+main{padding:32px 16px}
+.home-wrap{min-height:auto;padding:32px 0}
 footer{flex-direction:column;text-align:center}
 }
-@media(max-width:380px){nav button{padding:5px 8px;font-size:.66rem;letter-spacing:.04em}}
 </style>
 
 </head>
 <body>
-<canvas id="bg-canvas"></canvas>
-
+<canvas id="bg"></canvas>
 <div id="app">
 
   <header>
@@ -243,99 +129,99 @@ footer{flex-direction:column;text-align:center}
 <!-- HOME -->
 <div class="tab-panel active" id="tab-home">
   <div class="home-wrap">
-    <div>
-      <div class="home-eyebrow"><span class="live-dot"></span> Website Now Live</div>
-      <h1 class="home-h1">
-        <span class="w1">Welcome to</span>
-        <span class="w2">Dev YVT</span>
-      </h1>
-      <p class="home-body">Your hub for assets, tools, and community. Built for developers and streamers who care about quality.</p>
-      <div class="cta-row" style="flex-direction:column;align-items:center;gap:12px;">
-        <button class="btn btn-fill" style="width:260px;" onclick="go('products',document.querySelectorAll('nav button')[1])">Browse Products</button>
-        <a href="https://discord.gg/thu8aFPcgq" target="_blank" rel="noopener" style="text-decoration:none;">
-          <button class="btn btn-fill" style="width:260px;">Join Discord Server</button>
-        </a>
-      </div>
+    <div class="badge"><span class="badge-dot"></span> Website Now Live</div>
+    <h1 class="h1">
+      <span class="l1">Welcome to</span>
+      <span class="l2">Dev YVT</span>
+    </h1>
+    <p class="h-desc">Your hub for assets, tools, and community. Built for developers and streamers who care about quality.</p>
+    <div class="btns">
+      <button class="btn btn-main" onclick="go('products',document.querySelectorAll('nav button')[1])">Browse Products</button>
+      <a class="btn btn-main" href="https://discord.gg/thu8aFPcgq" target="_blank" rel="noopener">Join Discord Server</a>
     </div>
   </div>
 </div>
 
 <!-- PRODUCTS -->
 <div class="tab-panel" id="tab-products">
-  <div class="page-label">Assets</div>
-  <h2 class="page-title">Products</h2>
-  <p class="page-sub">Everything we've built — free and premium.</p>
-  <div class="products-grid">
-
+  <div class="pg-label">Assets</div>
+  <h2 class="pg-title">Products</h2>
+  <p class="pg-sub">Everything we've built.</p>
+  <div class="prod-grid">
     <div class="card" style="display:flex;flex-direction:column;">
-      <div class="product-header"><div class="product-icon-wrap">📢</div><span class="tag tag-paid">v3</span></div>
-      <div class="product-name">Announcement System</div>
-      <div class="product-desc">A fully-featured v3 announcement system. Push rich announcements with roles, scheduling, and formatting — built for serious servers.</div>
-      <div class="product-footer"><div class="product-price">Premium</div><button class="product-cta">Get →</button></div>
+      <div class="prod-head">
+        <div class="prod-icon">📢</div>
+        <span class="tag tag-v3">v3</span>
+      </div>
+      <div class="prod-name">Announcement System</div>
+      <div class="prod-desc">A fully-featured v3 announcement system. Push rich announcements with roles, scheduling, and formatting — built for serious servers.</div>
+      <div class="prod-foot">
+        <div class="prod-price">Premium</div>
+        <button class="prod-cta">Get →</button>
+      </div>
     </div>
-
   </div>
 </div>
 
 <!-- SOCIALS -->
 <div class="tab-panel" id="tab-socials">
-  <div class="page-label">Links</div>
-  <h2 class="page-title">Socials</h2>
-  <p class="page-sub">Find us wherever you spend your time.</p>
-  <div class="socials-grid">
-    <a class="social-card" href="https://discord.gg/thu8aFPcgq" target="_blank" rel="noopener">
-      <div class="s-icon" style="background:rgba(88,101,242,0.15);border-color:rgba(88,101,242,0.3);">💬</div>
-      <div><div class="s-name">Discord</div><div class="s-handle">discord.gg/thu8aFPcgq</div></div>
-      <div class="s-arrow">↗</div>
+  <div class="pg-label">Links</div>
+  <h2 class="pg-title">Socials</h2>
+  <p class="pg-sub">Find us wherever you spend your time.</p>
+  <div class="soc-grid">
+    <a class="soc-card" href="https://discord.gg/thu8aFPcgq" target="_blank" rel="noopener">
+      <div class="soc-icon">💬</div>
+      <div><div class="soc-name">Discord</div><div class="soc-handle">discord.gg/thu8aFPcgq</div></div>
+      <div class="soc-arrow">↗</div>
     </a>
-    <a class="social-card" href="https://www.tiktok.com/@yvtlive" target="_blank" rel="noopener">
-      <div class="s-icon" style="background:rgba(255,45,120,0.12);border-color:rgba(255,45,120,0.25);">🎵</div>
-      <div><div class="s-name">TikTok</div><div class="s-handle">@yvtlive</div></div>
-      <div class="s-arrow">↗</div>
+    <a class="soc-card" href="https://www.tiktok.com/@yvtlive" target="_blank" rel="noopener">
+      <div class="soc-icon">🎵</div>
+      <div><div class="soc-name">TikTok</div><div class="soc-handle">@yvtlive</div></div>
+      <div class="soc-arrow">↗</div>
     </a>
-    <a class="social-card" href="https://youtube.com/@yvt_youtube" target="_blank" rel="noopener">
-      <div class="s-icon" style="background:rgba(255,0,0,0.12);border-color:rgba(255,0,0,0.25);">▶️</div>
-      <div><div class="s-name">YouTube</div><div class="s-handle">@yvt_youtube</div></div>
-      <div class="s-arrow">↗</div>
+    <a class="soc-card" href="https://youtube.com/@yvt_youtube" target="_blank" rel="noopener">
+      <div class="soc-icon">▶️</div>
+      <div><div class="soc-name">YouTube</div><div class="soc-handle">@yvt_youtube</div></div>
+      <div class="soc-arrow">↗</div>
     </a>
   </div>
 </div>
 
 <!-- STAFF -->
 <div class="tab-panel" id="tab-staff">
-  <div class="page-label">Team</div>
-  <h2 class="page-title">Staff</h2>
-  <p class="page-sub">The people who keep things running.</p>
-  <div class="staff-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">
+  <div class="pg-label">Team</div>
+  <h2 class="pg-title">Staff</h2>
+  <p class="pg-sub">The people who keep things running.</p>
+  <div class="staff-grid">
     <div class="staff-card">
-      <div class="av-wrap">👑</div>
-      <div class="staff-name">Dev YVT</div>
-      <div class="role-badge rb-owner">Owner</div>
-      <p class="staff-bio">Founder &amp; lead developer. Builder, streamer, the brain behind it all.</p>
+      <div class="av">👑</div>
+      <div class="sname">Dev YVT</div>
+      <div class="role r-owner">Owner</div>
+      <p class="sbio">Founder & lead developer. Builder, streamer, the brain behind it all.</p>
     </div>
     <div class="staff-card">
-      <div class="av-wrap">🤝</div>
-      <div class="staff-name">Eldr</div>
-      <div class="role-badge rb-coowner">Co-Owner</div>
-      <p class="staff-bio">Co-owner and developer. Helps drive the project forward and keeps things running.</p>
+      <div class="av">🤝</div>
+      <div class="sname">Eldr</div>
+      <div class="role r-coowner">Co-Owner</div>
+      <p class="sbio">Co-owner and developer. Helps drive the project forward and keeps things running.</p>
     </div>
     <div class="staff-card">
-      <div class="av-wrap">🔨</div>
-      <div class="staff-name">Xavier</div>
-      <div class="role-badge rb-trialmod">Trial Mod</div>
-      <p class="staff-bio">New to the team. Helping keep the community in order.</p>
+      <div class="av">🔨</div>
+      <div class="sname">Xavier</div>
+      <div class="role r-trialmod">Trial Mod</div>
+      <p class="sbio">New to the team. Helping keep the community in order.</p>
     </div>
     <div class="staff-card">
-      <div class="av-wrap">🔨</div>
-      <div class="staff-name">Kyle</div>
-      <div class="role-badge rb-trialmod">Trial Mod</div>
-      <p class="staff-bio">New to the team. Helping keep the community in order.</p>
+      <div class="av">🔨</div>
+      <div class="sname">Kyle</div>
+      <div class="role r-trialmod">Trial Mod</div>
+      <p class="sbio">New to the team. Helping keep the community in order.</p>
     </div>
     <div class="staff-card">
-      <div class="av-wrap">🎨</div>
-      <div class="staff-name">Tazz</div>
-      <div class="role-badge rb-dev">Website Designer</div>
-      <p class="staff-bio">Designed and built the Tazz website from the ground up.</p>
+      <div class="av">🎨</div>
+      <div class="sname">Tazz</div>
+      <div class="role r-dev">Website Designer</div>
+      <p class="sbio">Designed and built the Tazz website from the ground up.</p>
     </div>
   </div>
 </div>
@@ -344,14 +230,14 @@ footer{flex-direction:column;text-align:center}
   </main>
 
   <footer>
-    <div class="footer-logo">Dev YVT</div>
-    <div class="footer-copy">© 2026 Dev YVT. All rights reserved.</div>
+    <div class="f-logo">Dev YVT</div>
+    <div class="f-copy">© 2026 Dev YVT. All rights reserved.</div>
   </footer>
 
 </div>
 
 <script>
-/* ── TABS ── */
+/* TABS */
 function go(name, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
@@ -360,98 +246,65 @@ function go(name, btn) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* ── BACKGROUND ── */
-const cvs = document.getElementById('bg-canvas');
+/* BACKGROUND */
+const cvs = document.getElementById('bg');
 const ctx = cvs.getContext('2d');
 let W, H;
 const mouse = { x: -9999, y: -9999 };
 
 function resize() {
-  W = cvs.width  = window.innerWidth;
+  W = cvs.width = window.innerWidth;
   H = cvs.height = window.innerHeight;
-  buildStars();
-  buildWebs();
+  buildDots();
 }
 
 window.addEventListener('resize', resize);
 window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
 window.addEventListener('touchmove', e => { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; }, { passive: true });
-window.addEventListener('touchend', () => { setTimeout(() => { mouse.x = -9999; mouse.y = -9999; }, 1000); });
+window.addEventListener('touchend', () => { setTimeout(() => { mouse.x = -9999; mouse.y = -9999; }, 800); });
 
-/* ── STARS / DUST ── */
-let stars = [];
-function buildStars() {
-  stars = [];
-  const count = Math.min(180, Math.floor(W * H / 7000));
-  for (let i = 0; i < count; i++) {
-    stars.push({
+/* FLOATING DOTS */
+let dots = [];
+function buildDots() {
+  dots = [];
+  const n = Math.min(120, Math.floor(W * H / 8000));
+  for (let i = 0; i < n; i++) {
+    dots.push({
       x: Math.random() * W,
       y: Math.random() * H,
-      r: Math.random() * 1.2 + 0.2,
-      a: Math.random() * 0.6 + 0.1,
-      speed: Math.random() * 0.15 + 0.03,
-      twinkle: Math.random() * Math.PI * 2,
-      twinkleSpeed: 0.005 + Math.random() * 0.015,
+      r: Math.random() * 2.5 + 1,
+      speed: Math.random() * 0.5 + 0.15,
+      a: Math.random() * 0.55 + 0.2,
+      drift: (Math.random() - 0.5) * 0.25,
+      pink: Math.random() > 0.5,
     });
   }
 }
 
-/* ── NEBULA ORBS (slow drifting colour clouds) ── */
+/* NEBULA ORBS */
 const orbs = [
-  { x: 0.15, y: 0.1,  r: 0.55, col: '124,58,237',  a: 0.13, dx: 0.00012, dy: 0.00008  },
-  { x: 0.85, y: 0.8,  r: 0.5,  col: '240,62,122',  a: 0.10, dx: -0.0001, dy: -0.00006 },
-  { x: 0.5,  y: 0.45, r: 0.4,  col: '80,20,160',   a: 0.08, dx: 0.00007, dy: 0.0001   },
-  { x: 0.2,  y: 0.85, r: 0.35, col: '200,50,120',  a: 0.07, dx: 0.00009, dy: -0.00008 },
-  { x: 0.78, y: 0.18, r: 0.38, col: '100,40,200',  a: 0.07, dx: -0.00008,dy: 0.00007  },
+  { x: 0.15, y: 0.15, r: 0.5,  col: '124,58,237', a: 0.13, dx: 0.00012, dy: 0.00008 },
+  { x: 0.85, y: 0.75, r: 0.45, col: '240,62,122', a: 0.10, dx: -0.0001, dy: -0.00007 },
+  { x: 0.5,  y: 0.45, r: 0.38, col: '80,20,160',  a: 0.08, dx: 0.00008, dy: 0.0001  },
 ];
 
-/* ── AURORA BEAMS ── */
-let auroraT = 0;
-
-/* ── GRID ── */
-const GRID = 64;
+/* GRID */
 let gridT = 0;
+const CELL = 90;
 
-/* ── PULSES ── */
+/* PULSES */
 const pulses = [];
-function spawnPulse() {
-  pulses.push({
-    x: Math.random() * W,
-    y: Math.random() * H,
-    r: 0,
-    maxR: 120 + Math.random() * 100,
-    a: 0.4,
-    speed: 0.7 + Math.random() * 0.5,
-    pink: Math.random() > 0.5,
-  });
+function addPulse() {
+  pulses.push({ x: Math.random() * W, y: Math.random() * H, r: 0, a: 0.4, spd: 0.8 + Math.random() * 0.6, max: 150 + Math.random() * 100, pink: Math.random() > 0.5 });
 }
-for (let i = 0; i < 4; i++) spawnPulse();
-setInterval(spawnPulse, 2400);
+for (let i = 0; i < 4; i++) addPulse();
+setInterval(addPulse, 2400);
 
-/* ── FLOATING DOTS ── */
-let webs = [];
-function buildWebs() {
-  webs = [];
-  const count = Math.min(120, Math.floor(W * H / 8000));
-  for (let i = 0; i < count; i++) {
-    webs.push({
-      x:     Math.random() * W,
-      y:     Math.random() * H,
-      r:     Math.random() * 2.5 + 1,
-      speed: Math.random() * 0.5 + 0.2,
-      a:     Math.random() * 0.6 + 0.2,
-      drift: (Math.random() - 0.5) * 0.3,
-    });
-  }
-}
-
-let raf;
 function draw() {
   ctx.clearRect(0, 0, W, H);
-  auroraT += 0.003;
   gridT += 0.35;
 
-  /* ── Deep space base ── */
+  /* Base */
   const base = ctx.createLinearGradient(0, 0, W * 0.6, H);
   base.addColorStop(0, '#06020f');
   base.addColorStop(0.5, '#040110');
@@ -459,169 +312,97 @@ function draw() {
   ctx.fillStyle = base;
   ctx.fillRect(0, 0, W, H);
 
-  /* ── Nebula orbs ── */
-  for (const orb of orbs) {
-    orb.x += orb.dx;
-    orb.y += orb.dy;
-    if (orb.x < 0 || orb.x > 1) orb.dx *= -1;
-    if (orb.y < 0 || orb.y > 1) orb.dy *= -1;
-    const cx2 = orb.x * W, cy2 = orb.y * H, rad = orb.r * Math.max(W, H);
-    const g = ctx.createRadialGradient(cx2, cy2, 0, cx2, cy2, rad);
-    g.addColorStop(0,   `rgba(${orb.col},${orb.a})`);
-    g.addColorStop(0.4, `rgba(${orb.col},${orb.a * 0.4})`);
-    g.addColorStop(1,   'transparent');
+  /* Nebula orbs */
+  for (const o of orbs) {
+    o.x += o.dx; o.y += o.dy;
+    if (o.x < 0 || o.x > 1) o.dx *= -1;
+    if (o.y < 0 || o.y > 1) o.dy *= -1;
+    const g = ctx.createRadialGradient(o.x*W, o.y*H, 0, o.x*W, o.y*H, o.r*Math.max(W,H));
+    g.addColorStop(0, `rgba(${o.col},${o.a})`);
+    g.addColorStop(0.5, `rgba(${o.col},${o.a*0.3})`);
+    g.addColorStop(1, 'transparent');
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, W, H);
   }
 
-  /* ── Aurora horizontal beams ── */
-  ctx.save();
-  ctx.globalAlpha = 0.06;
-  for (let i = 0; i < 3; i++) {
-    const yPos = H * (0.2 + i * 0.28) + Math.sin(auroraT + i * 2.1) * H * 0.06;
-    const wave = ctx.createLinearGradient(0, yPos - 80, 0, yPos + 80);
-    const hue  = i === 0 ? '240,62,122' : i === 1 ? '124,58,237' : '80,40,200';
-    wave.addColorStop(0,   'transparent');
-    wave.addColorStop(0.4, `rgba(${hue},0.55)`);
-    wave.addColorStop(0.6, `rgba(${hue},0.55)`);
-    wave.addColorStop(1,   'transparent');
-    ctx.fillStyle = wave;
-    // Wavy aurora using bezier
-    ctx.beginPath();
-    ctx.moveTo(0, yPos - 80);
-    ctx.bezierCurveTo(
-      W * 0.25, yPos - 80 + Math.sin(auroraT * 1.2 + i) * 30,
-      W * 0.75, yPos - 80 + Math.sin(auroraT * 0.9 + i + 1) * 30,
-      W, yPos - 80
-    );
-    ctx.lineTo(W, yPos + 80);
-    ctx.bezierCurveTo(
-      W * 0.75, yPos + 80 + Math.sin(auroraT * 1.1 + i + 2) * 20,
-      W * 0.25, yPos + 80 + Math.sin(auroraT * 0.8 + i) * 20,
-      0, yPos + 80
-    );
-    ctx.closePath();
-    ctx.fill();
-  }
-  ctx.globalAlpha = 1;
-  ctx.restore();
+  /* Grid */
+  const sx = gridT % CELL;
+  const sy = (gridT * 0.65) % CELL;
+  const ws = gridT * 0.045;
 
-  /* ══ ADVANCED GRID ══ */
-  ctx.save();
-
-  const CELL    = 90;
-  const scrollX = gridT % CELL;
-  const scrollY = (gridT * 0.65) % CELL;
-  const waveSpeed = gridT * 0.045;
-
-  // Vertical lines
-  for (let x = -CELL + scrollX; x < W + CELL; x += CELL) {
-    const colIdx = Math.round((x - scrollX) / CELL);
-    const wave   = 0.5 + 0.5 * Math.sin(waveSpeed - colIdx * 0.4);
-    const alpha  = 0.1 + wave * 0.1;
-
-    ctx.strokeStyle = `rgba(170,90,255,${alpha})`;
-    ctx.lineWidth   = 0.8 + wave * 0.4;
+  for (let x = -CELL + sx; x < W + CELL; x += CELL) {
+    const ci = Math.round((x - sx) / CELL);
+    const wv = 0.5 + 0.5 * Math.sin(ws - ci * 0.4);
+    ctx.strokeStyle = `rgba(170,90,255,${0.1 + wv * 0.1})`;
+    ctx.lineWidth = 0.8 + wv * 0.4;
     ctx.shadowColor = '#9b5cf6';
-    ctx.shadowBlur  = 4 + wave * 5;
+    ctx.shadowBlur = 4 + wv * 5;
     ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
   }
   ctx.shadowBlur = 0;
 
-  // Horizontal lines
-  for (let y = -CELL + scrollY; y < H + CELL; y += CELL) {
-    const rowIdx = Math.round((y - scrollY) / CELL);
-    const wave   = 0.5 + 0.5 * Math.sin(waveSpeed * 0.7 - rowIdx * 0.35);
-    const alpha  = 0.09 + wave * 0.09;
-
-    ctx.strokeStyle = `rgba(240,62,160,${alpha})`;
-    ctx.lineWidth   = 0.8 + wave * 0.4;
+  for (let y = -CELL + sy; y < H + CELL; y += CELL) {
+    const ri = Math.round((y - sy) / CELL);
+    const wv = 0.5 + 0.5 * Math.sin(ws * 0.7 - ri * 0.35);
+    ctx.strokeStyle = `rgba(240,62,160,${0.09 + wv * 0.09})`;
+    ctx.lineWidth = 0.8 + wv * 0.4;
     ctx.shadowColor = '#f03e7a';
-    ctx.shadowBlur  = 4 + wave * 5;
+    ctx.shadowBlur = 4 + wv * 5;
     ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
   }
   ctx.shadowBlur = 0;
 
-  // Intersection nodes
-  for (let x = -CELL + scrollX; x < W + CELL; x += CELL) {
-    for (let y = -CELL + scrollY; y < H + CELL; y += CELL) {
-      const colIdx = Math.round((x - scrollX) / CELL);
-      const rowIdx = Math.round((y - scrollY) / CELL);
-      const wave   = 0.5 + 0.5 * Math.sin(waveSpeed - colIdx * 0.4 - rowIdx * 0.35);
-      const a = 0.12 + wave * 0.18;
-      ctx.save();
-      ctx.shadowColor = '#9b5cf6'; ctx.shadowBlur = 4 + wave * 4;
-      ctx.fillStyle = `rgba(210,150,255,${a})`;
-      ctx.beginPath(); ctx.arc(x, y, 1.2 + wave * 0.8, 0, Math.PI * 2); ctx.fill();
-      ctx.restore();
+  /* Grid nodes */
+  for (let x = -CELL + sx; x < W + CELL; x += CELL) {
+    for (let y = -CELL + sy; y < H + CELL; y += CELL) {
+      const ci = Math.round((x - sx) / CELL);
+      const ri = Math.round((y - sy) / CELL);
+      const wv = 0.5 + 0.5 * Math.sin(ws - ci * 0.4 - ri * 0.35);
+      ctx.fillStyle = `rgba(210,150,255,${0.12 + wv * 0.18})`;
+      ctx.shadowColor = '#9b5cf6';
+      ctx.shadowBlur = 4 + wv * 4;
+      ctx.beginPath(); ctx.arc(x, y, 1.2 + wv * 0.8, 0, Math.PI * 2); ctx.fill();
     }
   }
+  ctx.shadowBlur = 0;
 
-  // Horizon fade
+  /* Horizon fade */
   const fade = ctx.createLinearGradient(0, H * 0.65, 0, H);
   fade.addColorStop(0, 'transparent');
   fade.addColorStop(1, 'rgba(4,2,13,0.7)');
   ctx.fillStyle = fade;
   ctx.fillRect(0, 0, W, H);
 
-  ctx.restore();
-
-
-  /* ── Stars ── */
-  for (const s of stars) {
-    s.twinkle += s.twinkleSpeed;
-    s.y -= s.speed * 0.1;
-    if (s.y < 0) { s.y = H; s.x = Math.random() * W; }
-    const ta = s.a * (0.5 + 0.5 * Math.sin(s.twinkle));
-    ctx.save();
-    ctx.shadowColor = 'rgba(200,180,255,0.8)';
-    ctx.shadowBlur  = s.r > 0.8 ? 6 : 2;
-    ctx.fillStyle   = `rgba(220,210,255,${ta})`;
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-  }
-
-  /* ── Pulse rings ── */
+  /* Pulse rings */
   for (let i = pulses.length - 1; i >= 0; i--) {
     const p = pulses[i];
-    p.r     += p.speed;
-    p.a     -= 0.005;
-    if (p.a <= 0 || p.r > p.maxR) { pulses.splice(i, 1); continue; }
-    ctx.save();
-    ctx.shadowColor = p.pink ? '#f03e7a' : '#7c3aed';
-    ctx.shadowBlur  = 16;
+    p.r += p.spd; p.a -= 0.005;
+    if (p.a <= 0 || p.r > p.max) { pulses.splice(i, 1); continue; }
     ctx.strokeStyle = p.pink ? `rgba(240,62,122,${p.a})` : `rgba(124,58,237,${p.a})`;
-    ctx.lineWidth   = 1.2;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.restore();
+    ctx.lineWidth = 1.2;
+    ctx.shadowColor = p.pink ? '#f03e7a' : '#7c3aed';
+    ctx.shadowBlur = 14;
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.stroke();
+    ctx.shadowBlur = 0;
   }
 
-  /* ── Floating dots rising upward ── */
+  /* Floating dots */
   ctx.shadowColor = '#a060ff';
-  ctx.shadowBlur  = 8;
-  for (const w of webs) {
-    w.y    -= w.speed;
-    w.x    += w.drift;
-    if (w.y < -10) {
-      w.y = H + 10;
-      w.x = Math.random() * W;
-    }
-    if (w.x < 0) w.x = W;
-    if (w.x > W) w.x = 0;
-    ctx.globalAlpha = w.a;
-    ctx.fillStyle   = Math.random() > 0.5 ? 'rgba(180,120,255,1)' : 'rgba(240,100,180,1)';
-    ctx.beginPath();
-    ctx.arc(w.x, w.y, w.r, 0, Math.PI * 2);
-    ctx.fill();
+  ctx.shadowBlur = 8;
+  for (const d of dots) {
+    d.y -= d.speed;
+    d.x += d.drift;
+    if (d.y < -10) { d.y = H + 10; d.x = Math.random() * W; }
+    if (d.x < 0) d.x = W;
+    if (d.x > W) d.x = 0;
+    ctx.globalAlpha = d.a;
+    ctx.fillStyle = d.pink ? '#ff4d9e' : '#a060ff';
+    ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2); ctx.fill();
   }
   ctx.globalAlpha = 1;
-  ctx.shadowBlur  = 0;
+  ctx.shadowBlur = 0;
 
-  raf = requestAnimationFrame(draw);
+  requestAnimationFrame(draw);
 }
 
 resize();
